@@ -39,7 +39,6 @@ public class Robotics {
         LocalTime starTime = LocalTime.parse(console.nextLine());
         String product;
         while (!"End".equals(product = console.nextLine())){
-            robots.stream().min();
         }
     }
 }
