@@ -1,0 +1,45 @@
+
+import java.time.LocalTime;
+import java.util.*;
+
+public class Robotics {
+    static class Robot{
+        String name;
+        int processTime;
+        LocalTime endTime;
+
+        public String getName() {
+            return name;
+        }
+
+        public int getProcessTime() {
+            return processTime;
+        }
+
+        public LocalTime getEndTime() {
+            return endTime;
+        }
+
+        public Robot(String name, int processTime) {
+            this.name = name;
+            this.processTime = processTime;
+            this.endTime = LocalTime.of(0, 0, 0);
+        }
+    }
+    public static void main(String[] args) {
+        Scanner console = new Scanner(System.in);
+        List<Robot> robots = new ArrayList<>();
+        Arrays.stream(console.nextLine().split(";"))
+                .forEach(s -> {
+                    String name = s.split("-")[0];
+                    int processTime = Integer.parseInt(s.split("-")[0]);
+                    Robot singleRobot = new Robot(name, processTime);
+                    robots.add(singleRobot);
+                });
+        LocalTime starTime = LocalTime.parse(console.nextLine());
+        String product;
+        while (!"End".equals(product = console.nextLine())){
+            robots.stream().min();
+        }
+    }
+}
