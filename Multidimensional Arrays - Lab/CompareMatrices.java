@@ -5,12 +5,12 @@ public class CompareMatrices {
     public static void main(String[] args) {
         Scanner console = new Scanner(System.in);
 
-        String[] rowColumnFirst = console.nextLine().split("\\s");
+        String[] rowColumnFirst = console.nextLine().split("\\s+");
         int rowFirst = Integer.parseInt(rowColumnFirst[0]);
         int colFirst = Integer.parseInt(rowColumnFirst[1]);
         int[][] firstMatrix = getMatrix(console, rowFirst, colFirst);
 
-        String[] rowColumnSecond = console.nextLine().split("\\s");
+        String[] rowColumnSecond = console.nextLine().split("\\s+");
         int rowSecond = Integer.parseInt(rowColumnSecond[0]);
         int colSecond = Integer.parseInt(rowColumnSecond[1]);
 
@@ -29,7 +29,7 @@ public class CompareMatrices {
     private static int[][] getMatrix(Scanner console, int row, int col) {
         int[][] Matrix = new int[row][col];
         for (int i = 0; i < row; i++) {
-            Matrix[i] = Arrays.stream(console.nextLine().split("\\s")).mapToInt(Integer::parseInt).toArray();
+            Matrix[i] = Arrays.stream(console.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
         }
         return Matrix;
     }
