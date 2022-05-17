@@ -38,6 +38,8 @@ public class Crossfire {
                 }
             }
         }
-        matrixToList.forEach(s -> System.out.println(Arrays.toString(s).replaceAll("[\\[\\],]", "")));
+        matrixToList.forEach(s -> {
+            if(s.length>0) System.out.println(Arrays.toString(s).replaceAll("[\\[\\],]", ""));
+        });
     }
 }
