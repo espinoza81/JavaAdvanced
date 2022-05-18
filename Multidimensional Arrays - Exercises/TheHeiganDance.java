@@ -36,6 +36,10 @@ public class TheHeiganDance {
                         case "Eruption":
                             if (cloud) {
                                 playerPoints -= 3500;
+                                if(playerPoints<=0){
+                                    spell = "Plague Cloud";
+                                    break;
+                                }
                                 cloud = false;
                             }
                             playerPoints -= 6000;
