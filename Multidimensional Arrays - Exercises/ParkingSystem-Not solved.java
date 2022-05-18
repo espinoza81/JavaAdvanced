@@ -15,44 +15,32 @@ public class ParkingSystem {
             int entryRow = Integer.parseInt(attribute[0]);
             int rowParking = Integer.parseInt(attribute[1]);
             int colParking = Integer.parseInt(attribute[2]);
-            boolean minus = false;
-            boolean haveParking = true;
             int index = 1;
             int stepToParking = 1 + Math.abs(entryRow - rowParking) + colParking;
             while (true) {
                 if (matrix[rowParking][colParking] == 0) {
                     matrix[rowParking][colParking] = 1;
+                    System.out.println(stepToParking);
                     break;
                 } else {
-                    if (!minus) {
-                        if (colParking - index > 0 && matrix[rowParking][colParking - index] == 0) {
-                            stepToParking -= index;
-                            matrix[rowParking][colParking - index] = 1;
-                            break;
-                        } else {
-                            minus = true;
-                        }
-                    } else {
-                        if (colParking + index < matrix[0].length) {
-                            if (matrix[rowParking][colParking + index] == 0) {
-                                stepToParking += index;
-                                matrix[rowParking][colParking + index] = 1;
-                                break;
-                            } else {
-                                index++;
-                                minus = false;
-                            }
-                        } else {
-                            haveParking = false;
-                            break;
-                        }
+                    if (colParking - index >= 1 && matrix[rowParking][colParking - index] == 0) {
+                        stepToParking -= index;
+                        matrix[rowParking][colParking - index] = 1;
+                        System.out.println(stepToParking);
+                        break;
+                    } else if (colParking + index < col && matrix[rowParking][colParking + index] == 0) {
+                        stepToParking += index;
+                        matrix[rowParking][colParking + index] = 1;
+                        System.out.println(stepToParking);
+                        break;
+                    } else if (colParking-index >=1 || colParking+index < col){
+                        index++;
+                    }
+                    else {
+                        System.out.println("Row " + rowParking + " full");
+                        break;
                     }
                 }
-            }
-            if (haveParking) {
-                System.out.println(stepToParking);
-            } else {
-                System.out.println("Row " + rowParking + " full");
             }
         }
     }
