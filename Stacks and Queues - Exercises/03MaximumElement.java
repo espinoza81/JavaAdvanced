@@ -1,4 +1,5 @@
 import java.util.ArrayDeque;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class MaximumElement {
@@ -15,7 +16,8 @@ public class MaximumElement {
                     number.pop();
                     break;
                 case 3:
-                    System.out.println(number.stream().max(Integer::compare).get());
+                    System.out.println(Collections.max(number));
+                    //System.out.println(number.stream().max(Integer::compare).get());
                     break;
                 default:
                     System.out.println("invalid command");
