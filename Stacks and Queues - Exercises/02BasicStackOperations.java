@@ -1,4 +1,5 @@
 import java.util.ArrayDeque;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class BasicStackOperations {
@@ -16,6 +17,6 @@ public class BasicStackOperations {
         }
         if (number.size() == 0) System.out.println(0);
         else if (number.contains(elementToCheck)) System.out.println("true");
-        else System.out.println(number.stream().min(Integer::compare).get());
+        else System.out.println(Collections.min(number));
     }
 }
