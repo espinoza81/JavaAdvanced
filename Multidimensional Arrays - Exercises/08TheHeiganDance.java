@@ -13,11 +13,18 @@ public class TheHeiganDance {
         String spell="";
 
         while (heiganPoints > 0 && playerPoints > 0) {
+            heiganPoints -= heiganDamage;
+            if (cloud) {
+                playerPoints -= 3500;
+                cloud = false;
+            }
+            if (playerPoints < 0 || heiganPoints < 0) break;
+
             String[] command = console.nextLine().split("\\s+");
             spell = command[0];
             int row = Integer.parseInt(command[1]);
             int col = Integer.parseInt(command[2]);
-            heiganPoints -= heiganDamage;
+
             if ((playerRow >= Math.max(0, row - 1) && playerRow <= Math.min(14, row + 1)) && (playerCol >= Math.max(0, col - 1) && playerCol <= Math.min(14, col + 1))) {
                 if (playerRow - 1 >= 0 && playerRow - 1 < Math.max(0, row - 1)) {
                     playerRow--;
@@ -32,31 +39,14 @@ public class TheHeiganDance {
                         case "Cloud":
                             playerPoints -= 3500;
                             spell = "Plague Cloud";
+                            cloud =true;
                             break;
                         case "Eruption":
-                            if (cloud) {
-                                playerPoints -= 3500;
-                                if(playerPoints<=0){
-                                    spell = "Plague Cloud";
-                                    break;
-                                }
-                                cloud = false;
-                            }
                             playerPoints -= 6000;
                             break;
                     }
                 }
             }
-
-            if (cloud) {
-                playerPoints -= 3500;
-                cloud = false;
-            }
-            if ("Plague Cloud".equals(spell)) {
-                cloud = true;
-            }
-
-
         }
 
         if (heiganPoints > 0) {
