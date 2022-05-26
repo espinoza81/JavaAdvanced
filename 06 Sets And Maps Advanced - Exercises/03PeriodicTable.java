@@ -12,6 +12,6 @@ public class PeriodicTable {
             String[] elements = console.nextLine().split("\\s+");
             chemicalElements.addAll(Arrays.asList(elements));
         }
-        System.out.println(chemicalElements.toString().replaceAll("[\\[\\],]", ""));
+        System.out.println(String.join(" ", chemicalElements));
     }
 }
