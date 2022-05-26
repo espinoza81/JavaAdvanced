@@ -7,7 +7,6 @@ public class DragonArmy {
     public static void main(String[] args) {
         Scanner console = new Scanner(System.in);
         Map<String, HashMap<String,int[]>> dragons = new LinkedHashMap<>();
-        Map<String, double[]> dragonsStatsByType = new HashMap<>();
         int number = Integer.parseInt(console.nextLine());
         for(int i=0; i<number; i++){
             String[] command = console.nextLine().split("\\s+");
@@ -21,7 +20,7 @@ public class DragonArmy {
             dragons.putIfAbsent(type, new LinkedHashMap<>());
             dragons.get(type).put(name, stats);
         }
-        
+
         dragons.forEach((key, value) -> {
             double damage = 0.00;
             double health = 0.00;
@@ -33,15 +32,9 @@ public class DragonArmy {
                 armor += stats[2];
                 count++;
             }
-            double[] statsAll = new double[]{damage, health, armor, count};
-            dragonsStatsByType.put(key, statsAll);
-        });
-        
-        dragons.forEach((key, value) -> {
-            double[] allStats = dragonsStatsByType.get(key);
-            double damage = allStats[0]/allStats[3];
-            double health = allStats[1]/allStats[3];
-            double armor = allStats[2]/allStats[3];
+            damage /= count;
+            health /= count;
+            armor /= count;
             System.out.printf("%s::(%.2f/%.2f/%.2f)%n", key, damage, health, armor);
             value.entrySet().stream()
                     .sorted(Map.Entry.comparingByKey())
