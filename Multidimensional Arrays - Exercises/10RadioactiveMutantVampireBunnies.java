@@ -13,8 +13,8 @@ public class RadioactiveMutantVampireBunnies {
         Character[][] matrix = new Character[row][col];
         int playerRow = 0;
         int playerCol = 0;
-        List<int[]> bunny = new ArrayList<>();
-        
+        List<String> bunny = new ArrayList<>();
+        String coordinateToAdd;
         for (int i = 0; i < row; i++) {
             String input = console.nextLine();
             for (int j = 0; j < col; j++) {
@@ -23,17 +23,15 @@ public class RadioactiveMutantVampireBunnies {
                         playerRow = i;
                         playerCol = j;
                         matrix[i][j] = '.';
-                    break;
+                        break;
                     case '.':
                         matrix[i][j] = input.charAt(j);
-                    break;
+                        break;
                     case'B':
                         matrix[i][j] = input.charAt(j);
-                        int[] coordinateToAdd = new int[2];
-                        coordinateToAdd[0] = i;
-                        coordinateToAdd[1] = j;
+                        coordinateToAdd = i + " " + j;
                         bunny.add(coordinateToAdd);
-                    break;
+                        break;
                 }
             }
         }
@@ -63,40 +61,32 @@ public class RadioactiveMutantVampireBunnies {
             }
 
             for (int j=bunny.size()-1; j>=0; j--) {
-                int bunnyRow = bunny.get(j)[0];
-                int bunnyCol = bunny.get(j)[1];
+                int bunnyRow = Integer.parseInt(bunny.get(j).split(" ")[0]);
+                int bunnyCol = Integer.parseInt(bunny.get(j).split(" ")[1]);
                 bunny.remove(j);
                 if(bunnyRow!=0) {
                     matrix[bunnyRow-1][bunnyCol] = 'B';
-                    int[] coordinateToAdd = new int[2];
-                    coordinateToAdd[0] = bunnyRow-1;
-                    coordinateToAdd[1] = bunnyCol;
-                    bunny.add(coordinateToAdd);
+                    coordinateToAdd = (bunnyRow-1) + " " + bunnyCol;
+                    if(! bunny.contains(coordinateToAdd)) bunny.add(coordinateToAdd);
                 }
                 if (bunnyCol!= col-1) {
                     matrix[bunnyRow][bunnyCol+1] = 'B';
-                    int[] coordinateToAdd = new int[2];
-                    coordinateToAdd[0] = bunnyRow;
-                    coordinateToAdd[1] = bunnyCol+1;
-                    bunny.add(coordinateToAdd);
+                    coordinateToAdd = bunnyRow + " " + (bunnyCol+1);
+                    if(! bunny.contains(coordinateToAdd)) bunny.add(coordinateToAdd);
                 }
                 if (bunnyCol!=0) {
                     matrix[bunnyRow][bunnyCol-1] = 'B';
-                    int[] coordinateToAdd = new int[2];
-                    coordinateToAdd[0] = bunnyRow;
-                    coordinateToAdd[1] = bunnyCol-1;
-                    bunny.add(coordinateToAdd);
+                    coordinateToAdd = bunnyRow + " " + (bunnyCol-1);
+                    if(! bunny.contains(coordinateToAdd)) bunny.add(coordinateToAdd);
                 }
                 if (bunnyRow!= row-1) {
                     matrix[bunnyRow+1][bunnyCol] = 'B';
-                    int[] coordinateToAdd = new int[2];
-                    coordinateToAdd[0] = bunnyRow+1;
-                    coordinateToAdd[1] = bunnyCol;
-                    bunny.add(coordinateToAdd);
+                    coordinateToAdd = (bunnyRow + 1) + " " + bunnyCol;
+                    if(! bunny.contains(coordinateToAdd)) bunny.add(coordinateToAdd);
                 }
             }
 
-            if (matrix[playerRow][playerCol] == 'B' && !won) dead = true;
+            if (!won && matrix[playerRow][playerCol] == 'B') dead = true;
             if (dead || won) break;
         }
         Arrays.stream(matrix).forEach(s -> {
